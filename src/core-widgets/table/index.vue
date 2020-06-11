@@ -1,0 +1,97 @@
+<template>
+  <div
+    :class="[playState ? 'anm-' + val.animationName : '']"
+    :style="{
+      position: val.belong === 'page' ? 'absolute' : 'relative',
+      left: val.left / w * 100 + '%', // val.belong === 'page' ? val.left / w * 100 + '%' : '0',
+      top: val.top / h * 100 + '%', // val.belong === 'page' ? val.top / h * 100 + '%' : '0',
+      width: val.width / w * 100 + '%',
+      minHeight: val.height / h * 100 + '%',
+      zIndex: val.z,
+      lineHeight: val.lineHeight,
+      fontSize: val.fontSize + 'rem',
+      color: val.color,
+      textAlign: val.textAlign,
+      fontWeight: val.fontWeight ? 'bold' : 'normal'
+    }"
+    class="txt"
+  >
+    <VueTabulator
+      v-model="dados"
+      :options="options"
+      class="table-striped table-bordered"/>
+  </div>
+</template>
+
+<script>
+const WIDGET_NAME = 'cs-table'
+
+export default {
+  name: WIDGET_NAME,
+  icon: `<svg class="bi bi-table" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+    <path fill-rule="evenodd" d="M15 4H1V3h14v1z"/>
+    <path fill-rule="evenodd" d="M5 15.5v-14h1v14H5zm5 0v-14h1v14h-1z"/>
+    <path fill-rule="evenodd" d="M15 8H1V7h14v1zm0 4H1v-1h14v1z"/>
+    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H0V2z"/>
+  </svg>`,
+  title: 'Table',
+  panel: null,
+  setting: {
+    type: WIDGET_NAME,
+    isContainer: false,
+    isUpload: false,
+    hasGuide: true,
+    isChild: true,
+    dragable: true,
+    resizable: true,
+    width: 650,
+    height: 100,
+    left: 50,
+    top: 0,
+    z: 0,
+    lineHeight: 1.6,
+    fontSize: 1.2,
+    fontWeight: false,
+    color: '#000000',
+    textAlign: 'left',
+    text: 'Text',
+    href: '',
+    belong: 'page',
+    animationName: ''
+  },
+  props: ['val', 'h', 'w', 'playState'],
+
+  data () {
+    return {
+      dados: [{
+        name: 'Teste',
+        age: 13
+      }],
+      options: {
+        columns: [{
+          title: 'Name',
+          field: 'name',
+          sorter: 'string',
+          width: 200,
+          editor: true
+        }]
+      }
+    }
+  },
+  methods: {
+  }
+}
+</script>
+<style lang='scss'>
+
+@import "~vue-tabulator/dist/scss/bootstrap/tabulator_bootstrap4";
+
+</style>
+
+<style scoped>
+  .txt {
+    outline: none;
+    font-size: 28px;
+  }
+</style>
