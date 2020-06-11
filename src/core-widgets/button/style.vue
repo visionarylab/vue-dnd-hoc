@@ -1,0 +1,57 @@
+<template>
+  <div>
+    <hr>
+    <div class="panel-row">
+      <vpd-icon name="target" />
+      <div class="panel-label">{{ $t('data.names.backgroundColor') }}</div>
+      <div class="panel-value">{{ activeElement.bgColor }}</div>
+      <div class="panel-value">
+        <input
+          v-model="activeElement.bgColor"
+          type="color">
+      </div>
+    </div>
+
+    <div class="panel-row">
+      <vpd-icon name="image" />
+      <div class="panel-label">{{ $t('data.names.backgroundImage') }}</div>
+      <div class="panel-value">
+        <div
+          :style="{ backgroundImage: 'url(' + activeElement.backPic + ')' }"
+          class="panel-preview"
+          @click="addPic">
+          <vpd-icon
+            v-show="!activeElement.backPic"
+            name="plus" />
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-row">
+      <vpd-icon name="edit-3" />
+      <div class="panel-label">{{ $t('data.names.textColor') }}</div>
+      <div class="panel-value">{{ activeElement.color }}</div>
+      <div>
+        <input
+          v-model="activeElement.color"
+          type="color">
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import vpd from '../../../src/mixins/vpd'
+export default {
+  name: 'BraidButtonStyle',
+  mixins: [vpd],
+  props: ['activeElement'],
+  methods: {
+    addPic () {
+      this.$vpd.$emit('upload', (payload) => {
+        this.$vpd.commit('addBackPic', payload)
+      })
+    }
+  }
+}
+</script>

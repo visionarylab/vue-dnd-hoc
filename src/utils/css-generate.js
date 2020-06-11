@@ -1,0 +1,44 @@
+export function getAnimateCss (name, animation, stops, needFormat = true) {
+  var properties = ['duration', 'timing', 'delay', 'iteration', 'direction', 'fill']
+  var values = [name]
+
+  properties.map(val => {
+    if (animation[val] === undefined) return
+    if (val === 'duration' || val === 'delay') {
+      values.push(animation[val] + 's')
+    } else if (val === 'iteration') {
+      values.push(animation[val] === 0 ? 'infinite' : animation[val])
+    } else {
+      values.push(animation[val])
+    }
+  })
+
+  var animateCss = 'animation: ' + values.join(' ') + ';'
+
+  var keyframes = []
+  if (needFormat) {
+    stops.map(val => {
+      keyframes.push('\t' + val.stop + '% {\n')
+      keyframes.push('\t\t' + val.css + '\n\t}\n')
+    })
+  } else {
+    stops.map(val => {
+      keyframes.push(val.stop + '% {')
+      keyframes.push(val.css + '}')
+    })
+  }
+  var keyframeCss = keyframes.join('')
+
+  var output =
+`
+.anm-${name} {
+  -webkit-${animateCss}
+  ${animateCss}
+}
+@keyframes ${name} {
+${keyframeCss}}
+@-webkit-keyframes ${name} {
+${keyframeCss}}
+`
+  return output
+}
