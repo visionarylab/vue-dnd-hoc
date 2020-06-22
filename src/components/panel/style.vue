@@ -64,7 +64,6 @@
 
     <component
       v-for="(item, i) in widgetStyle"
-      v-if="item.type === activeElement.type"
       :is="widgetStyle[i]"
       :key="i"
       :active-element="activeElement" />
@@ -101,8 +100,9 @@ export default {
 
   computed: {
     widgetStyle () {
-      return widget.getWidgetStyle()
+      return widget.getWidgetStyle(this.activeElement)
     },
+
     height () {
       return this.$vpd.state.page.height
     },

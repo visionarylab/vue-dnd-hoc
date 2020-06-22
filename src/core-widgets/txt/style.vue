@@ -125,7 +125,7 @@
 
 <script>
 export default {
-  name: 'BraidTxtStyle',
+  name: 'CSTxtStyle',
   props: ['activeElement'],
   methods: {
     getToolTipName (name) {

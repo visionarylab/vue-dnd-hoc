@@ -4,11 +4,11 @@
       <li
         :class="{active: activeTab === 1}"
         class="tab-item"
-        @click="activeTab = 1"><a>{{ $t('data.names.params') }}</a></li>
+        @click="activeTab = 1"><a>{{ $t('data.names.style') }}</a></li>
       <li
         :class="{active: activeTab === 2}"
         class="tab-item"
-        @click="activeTab = 2"><a>{{ $t('data.names.event') }}</a></li>
+        @click="activeTab = 2"><a>{{ $t('data.names.params') }}</a></li>
         <!-- <li
         :class="{active: activeTab === 3}"
         class="tab-item"
@@ -21,7 +21,7 @@
     <appearance
       :active-element="activeElement"
       :tab="activeTab"/>
-    <event
+    <params
       :active-element="activeElement"
       :tab="activeTab"/>
     <animation
@@ -46,7 +46,7 @@
 <script>
 import page from './page.vue'
 import style from './style.vue'
-import event from './event.vue'
+import params from './params.vue'
 import animation from './animation.vue'
 import vpd from '../../mixins/vpd'
 import widget from '../../plugins/widget'
@@ -56,7 +56,7 @@ export default {
   components: {
     page: page,
     appearance: style,
-    event: event,
+    params: params,
     animation: animation
   },
   mixins: [vpd],
@@ -68,7 +68,6 @@ export default {
   },
 
   computed: {
-    // 选中元素对象
     activeElement () {
       return this.$vpd.state.activeElement
     },

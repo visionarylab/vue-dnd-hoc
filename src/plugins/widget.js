@@ -3,7 +3,7 @@ import coreWidgets from '../core-widgets'
 import vpd from '../mixins/vpd'
 
 var widgets
-var widgetStyle = {}
+var widgetPanels = {'style': {}, 'params': {}}
 
 const install = (Vue, config = {}) => {
   if (install.installed) return
@@ -15,11 +15,11 @@ const install = (Vue, config = {}) => {
     Vue.component(key, Vue.extend(widgets[key]).extend(vpd))
     // style panel
     if (widgets[key]['panel']) {
-      let panel = Object.assign({}, widgets[key]['panel'], {
-        type: key
-      })
-      Vue.component(panel.name, Vue.extend(panel).extend(vpd))
-      widgetStyle[panel.name] = panel
+      for (const [k, v] of Object.entries(widgets[key]['panel'])) {
+        let panel = Object.assign({}, v, { type: key })
+        Vue.component(panel.name, Vue.extend(panel).extend(vpd))
+        widgetPanels[k][panel.name] = panel
+      }
       // remove panel from object
       delete widgets[key]['panel']
     }
@@ -31,7 +31,22 @@ export default {
   getWidgets () {
     return widgets
   },
-  getWidgetStyle () {
-    return widgetStyle
+  getWidgetStyle (activeElement) {
+    const result = {}
+    for (const [name, value] of Object.entries(widgetPanels['style'])) {
+      if (value.type === activeElement.type) {
+        result[name] = value
+      }
+    }
+    return result
+  },
+  getWidgetParams (activeElement) {
+    const result = {}
+    for (const [name, value] of Object.entries(widgetPanels['params'])) {
+      if (value.type === activeElement.type) {
+        result[name] = value
+      }
+    }
+    return result
   }
 }

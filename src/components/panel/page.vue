@@ -37,18 +37,6 @@
           type="color">
       </div>
     </div>
-
-    <div
-      class="panel-row"
-      flex>
-      <vpd-icon name="clock" />
-      <div class="panel-label">{{ $t('messages.page.endTime') }}</div>
-      <div class="panel-value">
-        <input
-          v-model="activeElement.endTime"
-          type="date">
-      </div>
-    </div>
   </div>
 </template>
 

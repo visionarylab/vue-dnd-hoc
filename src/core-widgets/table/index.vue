@@ -18,16 +18,21 @@
   >
     <VueTabulator
       v-model="dados"
-      :options="options"
-      class="table-striped table-bordered"/>
+      :options="JSON.parse(val.options)"
+      class="table-striped table-bordered"
+      @row-click="rowClicked"/>
   </div>
 </template>
 
 <script>
+import params from './params'
+import vpd from '../../../src/mixins/vpd'
+
 const WIDGET_NAME = 'cs-table'
 
 export default {
   name: WIDGET_NAME,
+  mixins: [vpd],
   icon: `<svg class="bi bi-table" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
     <path fill-rule="evenodd" d="M15 4H1V3h14v1z"/>
@@ -36,7 +41,7 @@ export default {
     <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H0V2z"/>
   </svg>`,
   title: 'Table',
-  panel: null,
+  panel: { 'params': params },
   setting: {
     type: WIDGET_NAME,
     isContainer: false,
@@ -61,7 +66,6 @@ export default {
     animationName: ''
   },
   props: ['val', 'h', 'w', 'playState'],
-
   data () {
     return {
       dados: [{
@@ -80,14 +84,17 @@ export default {
     }
   },
   methods: {
+    rowClicked (e, row) {
+      console.log('Row clicked', row)
+      this.$vpd.commit('updateData', {
+        uuid: this.val.uuid,
+        key: 'selectedRow',
+        value: this.val.selectedRow
+      })
+    }
   }
 }
 </script>
-<style lang='scss'>
-
-@import "~vue-tabulator/dist/scss/bootstrap/tabulator_bootstrap4";
-
-</style>
 
 <style scoped>
   .txt {

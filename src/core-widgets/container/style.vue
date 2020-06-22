@@ -131,7 +131,7 @@
 <script>
 import vpd from '../../../src/mixins/vpd'
 export default {
-  name: 'BraidContainerStyle',
+  name: 'CSContainerStyle',
   mixins: [vpd],
   props: ['activeElement'],
   methods: {

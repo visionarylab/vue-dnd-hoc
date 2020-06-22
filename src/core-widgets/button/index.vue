@@ -12,14 +12,15 @@
       backgroundImage: 'url(' + val.backPic + ')',
       color: val.color
     }"
-    contenteditable="true"
-    @blur="(e) => updateText(e, val.uuid)"
+    contenteditable="false"
     v-html="val.text"/>
 </template>
 
 <script>
 import vpd from '../../../src/mixins/vpd'
-import stylec from './style.vue'
+import csButtonStyle from './style.vue'
+import csButtonParams from './params.vue'
+
 const WIDGET_NAME = 'cs-button'
 
 export default {
@@ -27,7 +28,7 @@ export default {
   mixins: [vpd],
   icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>',
   title: 'Button',
-  panel: stylec,
+  panel: { 'style': csButtonStyle, 'params': csButtonParams },
   setting: {
     type: WIDGET_NAME,
     isContainer: false,
@@ -50,24 +51,7 @@ export default {
     belong: 'page',
     animationName: ''
   },
-  props: ['h', 'w', 'val', 'playState'],
-  computed: {
-    widgetStore () {
-      return this.$vpd.state.widgets.filter(item => item.belong === 'page')
-    }
-  },
-  methods: {
-    updateText (e, uuid) {
-      let text = e.target.innerHTML
-      if (this.widgetStore.find(widget => { return widget.uuid === uuid })) { // check if widget is present in store with matchinh uuid. Only then Update Data
-        this.$vpd.commit('updateData', {
-          uuid: uuid,
-          key: 'text',
-          value: text
-        })
-      }
-    }
-  }
+  props: ['h', 'w', 'val', 'playState']
 }
 </script>
 

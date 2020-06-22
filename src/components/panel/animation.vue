@@ -171,7 +171,6 @@ export default {
 
   watch: {
     currentName: function (val) {
-      // 设置选中元件的动画名称
       if (this.activeElement.animationName !== undefined) {
         this.activeElement.animationName = val
       }

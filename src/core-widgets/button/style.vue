@@ -42,8 +42,9 @@
 
 <script>
 import vpd from '../../../src/mixins/vpd'
+
 export default {
-  name: 'BraidButtonStyle',
+  name: 'CSButtonStyle',
   mixins: [vpd],
   props: ['activeElement'],
   methods: {

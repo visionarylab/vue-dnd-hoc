@@ -63,8 +63,8 @@ import overlayBtn from './overlay-btn.vue'
 export default {
   name: 'Viewport',
   components: {
-    ref: ref, // 参考线
-    control: control // 尺寸控制
+    ref: ref,
+    control: control
   },
 
   mixins: [move, vpd],
@@ -163,7 +163,7 @@ export default {
 
         target = this.$vpd.state.activeElement
         if (target.belong === 'page' && target.dragable && this.mode === 'edit') {
-          this.initmovement(e) // 参见 mixins
+          this.initmovement(e)
         }
       } else {
         this.$vpd.commit('select', {

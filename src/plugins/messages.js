@@ -25,8 +25,8 @@ const messages = {
       },
 
       names: {
-        params: 'Style',
-        event: 'Params',
+        style: 'Style',
+        params: 'Params',
         animation: 'Animation',
 
         width: 'Width',
@@ -53,10 +53,9 @@ const messages = {
         bold: 'Bold'
       },
 
-      events: {
-        onclick: 'On click',
-        linkTo: 'Link to',
-        linkPlaceholder: 'Abs path, starting with https: //'
+      params: {
+        name: 'Name',
+        options: 'Options'
       },
 
       animations: {
