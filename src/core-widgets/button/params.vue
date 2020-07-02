@@ -2,6 +2,7 @@
   <div>
 
     <div class="panel-row">
+      <vpd-icon name="cpu" />
       <div class="panel-label">{{ $t('data.params.options') }}</div>
       <div class="panel-value">
         <textarea

@@ -64,4 +64,7 @@ export default {
 .del-btn:focus {
   outline: unset;
 }
+.icon {
+  pointer-events:none; /* click on svg icon should not trigger event */
+}
 </style>

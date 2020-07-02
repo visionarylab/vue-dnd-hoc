@@ -3,8 +3,8 @@
     :class="[playState ? 'anm-' + val.animationName : '']"
     :style="{
       position: val.belong === 'page' ? 'absolute' : 'relative',
-      left: val.left / w * 100 + '%', // val.belong === 'page' ? val.left / w * 100 + '%' : '0',
-      top: val.top / h * 100 + '%', // val.belong === 'page' ? val.top / h * 100 + '%' : '0',
+      left: val.left / w * 100 + '%',
+      top: val.top / h * 100 + '%',
       width: val.width / w * 100 + '%',
       minHeight: val.height / h * 100 + '%',
       zIndex: val.z,
@@ -16,22 +16,23 @@
     }"
     class="txt"
   >
-    <VueTabulator
-      v-model="dados"
-      :options="JSON.parse(val.options)"
-      class="table-striped table-bordered"
-      @row-click="rowClicked"/>
+    <tablulator
+      :endpoint="val.endpoint"
+      :options="val.options"
+      class="no-events"/>
   </div>
 </template>
 
 <script>
 import params from './params'
 import vpd from '../../../src/mixins/vpd'
+import tablulator from './table.vue'
 
 const WIDGET_NAME = 'cs-table'
 
 export default {
   name: WIDGET_NAME,
+  components: { tablulator },
   mixins: [vpd],
   icon: `<svg class="bi bi-table" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
@@ -66,23 +67,7 @@ export default {
     animationName: ''
   },
   props: ['val', 'h', 'w', 'playState'],
-  data () {
-    return {
-      dados: [{
-        name: 'Teste',
-        age: 13
-      }],
-      options: {
-        columns: [{
-          title: 'Name',
-          field: 'name',
-          sorter: 'string',
-          width: 200,
-          editor: true
-        }]
-      }
-    }
-  },
+
   methods: {
     rowClicked (e, row) {
       console.log('Row clicked', row)
@@ -97,8 +82,7 @@ export default {
 </script>
 
 <style scoped>
-  .txt {
-    outline: none;
-    font-size: 28px;
+  .no-events {
+    pointer-events:none;
   }
 </style>

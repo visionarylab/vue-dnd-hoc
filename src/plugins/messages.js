@@ -53,9 +53,17 @@ const messages = {
         bold: 'Bold'
       },
 
+      events: {
+        onclick: 'On Click',
+        linkTo: 'Link To',
+        linkPlaceholder: 'Absolute path, starting with https://'
+      },
+
       params: {
         name: 'Name',
-        options: 'Options'
+        options: 'Options',
+        optionsPlaceholder: 'Options',
+        endpoint: 'End Point'
       },
 
       animations: {
@@ -115,6 +123,7 @@ const messages = {
       },
 
       names: {
+        style: '样式',
         params: '参数',
         event: '交互',
         animation: '动画',
@@ -147,6 +156,13 @@ const messages = {
         onclick: '点击时',
         linkTo: '链接至',
         linkPlaceholder: '绝对路径，以https://开头'
+      },
+
+      params: {
+        name: '名称',
+        options: '选件',
+        optionsPlaceholder: '选件',
+        endpoint: '后端'
       },
 
       animations: {
@@ -206,6 +222,7 @@ const messages = {
       },
 
       names: {
+        style: 'శైలి',
         params: 'పరామితులు',
         event: 'ఈవెంట్స్',
         animation: 'యానిమేషన్',
@@ -238,6 +255,13 @@ const messages = {
         onclick: 'క్లిక్ చేసినప్పుడు',
         linkTo: 'దీనికి లింక్ చేయండి',
         linkPlaceholder: 'Https: // తో ప్రారంభమయ్యే సంపూర్ణ మార్గం'
+      },
+
+      params: {
+        name: 'పేరు',
+        options: 'ఎంపికలు',
+        optionsPlaceholder: 'ఎంపికలు',
+        endpoint: 'మూల లింక్'
       },
 
       animations: {

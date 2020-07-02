@@ -120,7 +120,8 @@ export default {
         }
       }
     }
-    state.widgets.splice(state.index, 1)
+    const result = state.widgets.findIndex(({ uuid }) => uuid === state.uuid);
+    state.widgets.splice(result, 1)
 
     state.activeElement = state.page
     state.uuid = -1
