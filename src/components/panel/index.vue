@@ -9,10 +9,6 @@
         :class="{active: activeTab === 2}"
         class="tab-item"
         @click="activeTab = 2"><a>{{ $t('data.names.params') }}</a></li>
-        <!-- <li
-        :class="{active: activeTab === 3}"
-        class="tab-item"
-        @click="activeTab = 3"><a>{{ $t('data.names.animation') }}</a></li> -->
     </ul>
 
     <page
@@ -22,9 +18,6 @@
       :active-element="activeElement"
       :tab="activeTab"/>
     <params
-      :active-element="activeElement"
-      :tab="activeTab"/>
-    <animation
       :active-element="activeElement"
       :tab="activeTab"/>
 
@@ -47,7 +40,6 @@
 import page from './page.vue'
 import style from './style.vue'
 import params from './params.vue'
-import animation from './animation.vue'
 import vpd from '../../mixins/vpd'
 import widget from '../../plugins/widget'
 import { cumulativeOffset, checkInView } from '../../utils/offset'
@@ -56,8 +48,7 @@ export default {
   components: {
     page: page,
     appearance: style,
-    params: params,
-    animation: animation
+    params: params
   },
   mixins: [vpd],
 
@@ -69,21 +60,22 @@ export default {
 
   computed: {
     activeElement () {
-      return this.$vpd.state.activeElement
+      return this.$store.state.vdh.activeElement
     },
 
     layers () {
-      return this.$vpd.state.widgets
+      return this.$store.state.vdh.widgets
     },
 
     widgets () {
       return widget.getWidgets()
     }
+
   },
 
   methods: {
     activeLayer (e, item) {
-      this.$vpd.commit('select', {
+      this.$store.commit('vdh/select', {
         uuid: item.uuid
       })
       let viewport = document.querySelector('#viewport')

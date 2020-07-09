@@ -26,10 +26,10 @@ export default {
   mixins: [vpd],
   computed: {
     moving () {
-      return this.$vpd.state.moving
+      return this.$store.state.vdh.moving
     },
     guides () {
-      var state = this.$vpd.state
+      var state = this.$store.state.vdh
       var guides = []
       var uuid = state.uuid
 
@@ -100,7 +100,7 @@ export default {
     },
 
     horizontal () {
-      var a = this.$vpd.state.activeElement
+      var a = this.$store.state.vdh.activeElement
       if (a) {
         var h = Math.round(a.height)
         return [a.top, a.top + h]
@@ -110,7 +110,7 @@ export default {
     },
 
     vertical () {
-      var a = this.$vpd.state.activeElement
+      var a = this.$store.state.vdh.activeElement
       if (a) {
         var w = Math.round(a.width / 2)
         return [a.left, a.left + w, a.left + w * 2]

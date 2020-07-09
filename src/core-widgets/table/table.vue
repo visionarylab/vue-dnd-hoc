@@ -8,6 +8,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
+import VueTabulator from 'vue-tabulator';
+Vue.use(VueTabulator);
+
 export default {
   name: 'Tablulator',
   props: ['options', 'endpoint'],
@@ -51,6 +56,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+@import  "~vue-tabulator/dist/scss/bootstrap/tabulator_bootstrap4";
 </style>

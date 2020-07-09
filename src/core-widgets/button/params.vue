@@ -24,7 +24,7 @@ export default {
   props: ['activeElement', 'tab'],
   methods: {
     updateText () {
-      this.$vpd.commit('updateData', {
+      this.$store.commit('vdh/updateData', {
         uuid: this.activeElement.uuid,
         key: 'text',
         value: this.activeElement.text

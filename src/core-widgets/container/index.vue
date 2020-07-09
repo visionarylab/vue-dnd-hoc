@@ -1,6 +1,5 @@
 <template>
   <div
-    :class="[playState ? 'anm-' + val.animationName : '']"
     :style="{
       display: val.display,
       position: 'absolute',

@@ -3,7 +3,7 @@ export default {
   zoom: 100,
   type: 'page',
   index: -1,
-  uuid: null,
+  uuid: -1,
   counter: 0,
 
   originX: 0,

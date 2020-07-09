@@ -195,7 +195,15 @@ export default {
   },
 
   updateData (state, {uuid, key, value}) {
-    let widget = state.widgets.find(w => w.uuid === uuid)
+    let widget = state.widgets.find(w => w.uuid === uuid) || state.page
     widget[key] = value
+  },
+
+  replaceState (state, payload) {
+    state = {...payload}
+  },
+
+  mode (state, val) {
+    state.mode = val
   }
 }

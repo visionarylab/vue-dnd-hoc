@@ -3,12 +3,10 @@
     <navbar :mode="mode"/>
     <div class="body container">
       <div class="columns col-gapless">
-        <transition name="slide-fade1">
-          <toolbar
-            v-show="modeFromState === 'edit'"
-            :zoom="zoom"
-            class="toolbar column"/>
-        </transition>
+        <toolbar
+          v-show="modeFromState === 'edit'"
+          :zoom="zoom"
+          class="toolbar column"/>
         <div class="viewport column">
           <viewport :zoom="zoom"/>
           <div class="zoom-wrap">
@@ -20,11 +18,9 @@
             <div class="zoom-value">{{ zoom }}%</div>
           </div>
         </div>
-        <transition name="slide-fade2">
-          <panel
-            v-show="modeFromState === 'edit'"
-            class="control-panel column"/>
-        </transition>
+        <panel
+          v-show="modeFromState === 'edit'"
+          class="control-panel column"/>
       </div>
     </div>
     <vpd-uploader
@@ -47,8 +43,9 @@ import toast from './components/toast.vue'
 import uploader from './components/uploader.vue'
 import slider from './components/slider.vue'
 import i18n from './plugins/i18n'
-import VueTabulator from 'vue-tabulator';
-Vue.use(VueTabulator);
+import actions from './store/actions'
+import mutation from './store/mutation'
+import state from './store/state'
 
 export default {
   name: 'VueDndHoc',
@@ -73,43 +70,50 @@ export default {
 
   computed: {
     zoom () {
-      return this.$vpd.state.zoom
+      return this.$store.state.vdh.zoom
     },
     modeFromState () {
-      return this.$vpd.state.mode
+      return this.$store.state.vdh.mode
     }
   },
   beforeCreate () {
     // TODO: custom svg path by config
     loadSprite('//unpkg.com/vue-page-designer@0.7.1/dist/icons.svg', 'svgspriteit')
+    this.$store.registerModule('vdh', {
+      namespaced: true,
+      state: state,
+      mutations: mutation,
+      actions: actions,
+      getters: []
+    })
   },
   created () {
     Vue.use(widget, {
       widgets: this.widgets
     })
     if (this.value) {
-      this.$vpd.replaceState(this.value)
+      this.$store.commit('vdh/replaceState', this.value)
     }
     this.$vpd.$on('save', () => {
-      this.$emit('save', this.$vpd.state)
+      this.$emit('save', this.$store.state.vdh)
     })
     if (this.mode) {
-      this.$vpd.state.mode = this.mode
+      this.$store.commit('vdh/mode', this.mode)
     }
   },
   mounted () {
-    this.$vpd.commit('initActive')
+    this.$store.commit('vdh/initActive')
   },
 
   methods: {
     dozoom (val) {
-      this.$vpd.commit('zoom', val)
+      this.$store.commit('vdh/zoom', val)
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .body {
   width: 100%;
   // height: calc(100% - 54px);

@@ -61,17 +61,17 @@ export default {
       return widget.getWidgets()
     },
     layers () {
-      return this.$vpd.state.widgets
+      return this.$store.state.vdh.widgets
     }
   },
   methods: {
     addWidget (e, item) {
-      this.$vpd.dispatch('addWidget', item)
+      this.$store.dispatch('vdh/addWidget', item)
     },
 
     updateSrollTop () {
       var top = document.getElementById('viewport').scrollTop / this.zoom * 100
-      this.$vpd.commit('updateSrollTop', top)
+      this.$store.commit('vdh/updateSrollTop', top)
     }
   }
 }

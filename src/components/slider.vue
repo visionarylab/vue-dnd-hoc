@@ -125,7 +125,6 @@ export default {
       this.focused = false
     },
 
-    // 从点击位置更新 value
     setValue (e) {
       const { $el, max, min, step } = this
       let value = (e.clientX - $el.firstElementChild.getBoundingClientRect().left) / $el.firstElementChild.offsetWidth * (max - min)

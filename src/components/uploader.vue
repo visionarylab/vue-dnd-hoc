@@ -27,7 +27,7 @@ export default {
 
   computed: {
     top () {
-      return this.$vpd.state.top
+      return this.$store.state.vdh.top
     }
   },
 

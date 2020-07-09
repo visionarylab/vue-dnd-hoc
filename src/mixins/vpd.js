@@ -1,4 +1,4 @@
-import vpd from '../store'
+import vpd from '../plugins/event-bus'
 
 export default {
   beforeCreate () {

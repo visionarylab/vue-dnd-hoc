@@ -1,6 +1,5 @@
 <template>
   <button
-    :class="[playState ? 'anm-' + val.animationName : '']"
     :style="{
       position: 'absolute',
       width: val.width / w * 100 + '%',

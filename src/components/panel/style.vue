@@ -104,12 +104,12 @@ export default {
     },
 
     height () {
-      return this.$vpd.state.page.height
+      return this.$store.state.vdh.page.height
     },
 
     containerName () {
       var arr = []
-      this.$vpd.state.widgets.map(
+      this.$store.state.vdh.widgets.map(
         val => val.isContainer && val.name && arr.push(val.name)
       )
       return arr
@@ -119,7 +119,7 @@ export default {
       if (this.activeElement.belong && this.activeElement.belong !== 'page') {
         return this.getActiveContainer().height
       }
-      return this.$vpd.state.page.height
+      return this.$store.state.vdh.page.height
     },
 
     containerWidth () {
@@ -132,7 +132,7 @@ export default {
 
   methods: {
     getActiveContainer () {
-      return this.$vpd.state.widgets.filter(val => val.isContainer && val.name === this.activeElement.belong)[0]
+      return this.$store.state.vdh.widgets.filter(val => val.isContainer && val.name === this.activeElement.belong)[0]
     }
   }
 }

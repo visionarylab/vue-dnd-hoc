@@ -71,10 +71,10 @@ export default {
   },
   computed: {
     show () {
-      return this.$vpd.state.type !== 'page'
+      return this.$store.state.vdh.type !== 'page'
     },
     mode () {
-      return this.$vpd.state.mode
+      return this.$store.state.vdh.mode
     }
   },
   mounted () {
@@ -128,23 +128,23 @@ export default {
 
   methods: {
     save () {
-      this.$vpd.dispatch('save')
+      this.$store.dispatch('vdh/save')
     },
 
     copyWidget () {
-      this.$vpd.commit('copy')
+      this.$store.commit('vdh/copy')
     },
 
     dele () {
-      this.$vpd.commit('delete')
+      this.$store.commit('vdh/delete')
     },
 
     preview () {
-      this.$vpd.state.mode = 'preview'
+      this.$store.commit('vdh/mode', 'preview')
     },
 
     backToEdit () {
-      this.$vpd.state.mode = 'edit'
+      this.$store.commit('vdh/mode', 'edit')
     }
   }
 }

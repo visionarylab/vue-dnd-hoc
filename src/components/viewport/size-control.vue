@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     elm () {
-      var target = this.$vpd.state.activeElement
+      var target = this.$store.state.vdh.activeElement
 
       // if (!target.resizable || target.belong !== 'page') return ''
       if (!target.resizable) return ''
@@ -70,7 +70,7 @@ export default {
     handlemousedown (e, type, originX, originY) {
       e.stopPropagation()
       this.type = type
-      this.$vpd.commit('initmove', {
+      this.$store.commit('vdh/initmove', {
         startX: e.pageX,
         startY: e.pageY,
         originX: this.elm[originX],
@@ -85,7 +85,7 @@ export default {
       e.stopPropagation()
       e.preventDefault()
 
-      this.$vpd.commit('resize', {
+      this.$store.commit('vdh/resize', {
         x: e.pageX,
         y: e.pageY,
         type: this.type
@@ -95,7 +95,7 @@ export default {
     handlemouseup () {
       document.removeEventListener('mousemove', this.handlemousemove, true)
       document.removeEventListener('mouseup', this.handlemouseup, true)
-      this.$vpd.commit('stopmove')
+      this.$store.commit('vdh/stopmove')
     }
   }
 }

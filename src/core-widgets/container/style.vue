@@ -137,7 +137,7 @@ export default {
   methods: {
     addPic () {
       this.$vpd.$emit('upload', (payload) => {
-        this.$vpd.commit('addContainerBackPic', payload)
+        this.$store.commit('vdh/addContainerBackPic', payload)
       })
     }
   }

@@ -1,6 +1,5 @@
 <template>
   <div
-    :class="[playState ? 'anm-' + val.animationName : '']"
     :style="{
       position: val.belong === 'page' ? 'absolute' : 'relative',
       left: val.left / w * 100 + '%', // val.belong === 'page' ? val.left / w * 100 + '%' : '0',

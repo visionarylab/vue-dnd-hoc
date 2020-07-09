@@ -1,9 +1,9 @@
 var move = {
   methods: {
     initmovement (e) {
-      var target = this.$vpd.state.activeElement
+      var target = this.$store.state.vdh.activeElement
 
-      this.$vpd.commit('initmove', {
+      this.$store.commit('vdh/initmove', {
         startX: e.pageX,
         startY: e.pageY,
         originX: target.left,
@@ -19,7 +19,7 @@ var move = {
       e.stopPropagation()
       e.preventDefault()
 
-      this.$vpd.commit('move', {
+      this.$store.commit('vdh/move', {
         x: e.pageX,
         y: e.pageY
       })
@@ -28,7 +28,7 @@ var move = {
     handlemouseup () {
       document.removeEventListener('mousemove', this.handlemousemove, true)
       document.removeEventListener('mouseup', this.handlemouseup, true)
-      this.$vpd.commit('stopmove')
+      this.$store.commit('vdh/stopmove')
     }
   }
 }

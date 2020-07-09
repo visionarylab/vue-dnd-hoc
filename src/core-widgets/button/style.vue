@@ -50,7 +50,7 @@ export default {
   methods: {
     addPic () {
       this.$vpd.$emit('upload', (payload) => {
-        this.$vpd.commit('addBackPic', payload)
+        this.$store.commit('vdh/addBackPic', payload)
       })
     }
   }

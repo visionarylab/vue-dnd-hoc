@@ -24,12 +24,12 @@ export default {
   props: ['activeElement', 'tab'],
   computed: {
     widgetStore () {
-      return this.$vpd.state.widgets.filter(item => item.belong === 'page')
+      return this.$store.state.vdh.widgets.filter(item => item.belong === 'page')
     }
   },
   methods: {
     updateText () {
-      this.$vpd.commit('updateData', {
+      this.$store.commit('vdh/updateData', {
         uuid: this.activeElement.uuid,
         key: 'text',
         value: this.activeElement.text

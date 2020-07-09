@@ -24,9 +24,7 @@
         :data-type="val.type"
         :data-uuid="val.uuid"
         :play-state="playState"
-        :id="val.uuid"
-        @mouseenter.native="showDelBtn(val.uuid)"
-        @mouseleave.native="hideDelBtn(val.uuid)">
+        :id="val.uuid">
         <component
           v-for="child in getChilds(val.name)"
           :is="child.type"
@@ -53,12 +51,10 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import ref from './ref-lines.vue'
 import control from './size-control.vue'
 import { move } from '../../mixins'
 import vpd from '../../mixins/vpd'
-import overlayBtn from './overlay-btn.vue'
 
 export default {
   name: 'Viewport',
@@ -79,31 +75,27 @@ export default {
 
   computed: {
     widgetStore () {
-      return this.$vpd.state.widgets.filter(item => item.belong === 'page')
+      return this.$store.state.vdh.widgets.filter(item => item.belong === 'page')
     },
 
     height () {
-      return this.$vpd.state.page.height
+      return this.$store.state.vdh.page.height
     },
 
     backgroundColor () {
-      return this.$vpd.state.page.backgroundColor
+      return this.$store.state.vdh.page.backgroundColor
     },
 
     id () {
-      // var type = this.$vpd.state.type
-      // var index = this.$vpd.state.index
-      // index = index >= 0 ? index : ''
-      // return type + index
-      return this.$vpd.state.uuid
+      return this.$store.state.vdh.uuid
     },
 
     playState () {
-      return this.$vpd.state.playState
+      return this.$store.state.vdh.playState
     },
 
     mode () {
-      return this.$vpd.state.mode
+      return this.$store.state.vdh.mode
     }
   },
 
@@ -123,7 +115,7 @@ export default {
       'keydown',
       e => {
         e.stopPropagation()
-        var target = this.$vpd.state.activeElement
+        var target = this.$store.state.vdh.activeElement
 
         if (e.keyCode === 37 && target.left) {
           target.left -= 1
@@ -157,31 +149,31 @@ export default {
       if (type) {
         var uuid = target.getAttribute('data-uuid')
 
-        this.$vpd.commit('select', {
+        this.$store.commit('vdh/select', {
           uuid: uuid || -1
         })
 
-        target = this.$vpd.state.activeElement
+        target = this.$store.state.vdh.activeElement
         if (target.belong === 'page' && target.dragable && this.mode === 'edit') {
           this.initmovement(e)
         }
       } else {
-        this.$vpd.commit('select', {
+        this.$store.commit('vdh/select', {
           uuid: -1
         })
       }
     },
 
     replaceImage (e) {
-      if (this.$vpd.state.activeElement.isUpload) {
-        this.$vpd.$emit('upload', payload => {
-          this.$vpd.commit('replaceImage', payload)
+      if (this.$store.state.vdh.activeElement.isUpload) {
+        this.$store.$emit('vdh/upload', payload => {
+          this.$store.commit('vdh/replaceImage', payload)
         })
       }
     },
 
     getChilds (name) {
-      return this.$vpd.state.widgets.filter(
+      return this.$store.state.vdh.widgets.filter(
         item => item.belong === name
       )
     },
@@ -203,22 +195,6 @@ export default {
           items[i].contentEditable = false
         }
       }
-    },
-
-    showDelBtn (uuid) {
-      const component = document.getElementById(uuid)
-      const componentType = component.getAttribute('data-type')
-      if (!document.getElementById('btn-' + uuid)) {
-        var OverlayBtnClass = Vue.extend(overlayBtn)
-        const vm = new OverlayBtnClass({
-          propsData: { uuid, componentType }
-        }).$mount()
-        component.appendChild(vm.$el)
-      }
-    },
-
-    hideDelBtn (uuid) {
-      document.getElementById(uuid).querySelectorAll('#btn-' + uuid).forEach(n => n.remove());
     }
   }
 }

@@ -70,8 +70,7 @@ export default {
 
   methods: {
     rowClicked (e, row) {
-      console.log('Row clicked', row)
-      this.$vpd.commit('updateData', {
+      this.$store.commit('vdh/updateData', {
         uuid: this.val.uuid,
         key: 'selectedRow',
         value: this.val.selectedRow
