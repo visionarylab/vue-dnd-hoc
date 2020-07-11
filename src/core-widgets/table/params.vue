@@ -33,13 +33,10 @@
 </template>
 
 <script>
+
 export default {
   name: 'TableParams',
-  props: ['activeElement', 'tab'],
-  beforeMount () {
-    this.activeElement.options = this.activeElement.options || '{"title": "Name", "field": "name", "sorter": "string", "width": 200 }, { "title": "Email", "field": "email", "sorter": "number", "width": 200 }'
-    this.activeElement.endpoint = this.activeElement.endpoint || 'https://jsonplaceholder.typicode.com/users/4'
-  }
+  props: ['activeElement', 'tab']
 }
 </script>
 <style scoped>

@@ -18,7 +18,7 @@
   >
     <tablulator
       :endpoint="val.endpoint"
-      :options="val.options"
+      :options="processOptions(val.options)"
       class="no-events"/>
   </div>
 </template>
@@ -64,10 +64,11 @@ export default {
     text: 'Text',
     href: '',
     belong: 'page',
-    animationName: ''
+    animationName: '',
+    endpoint: 'https://jsonplaceholder.typicode.com/users/4',
+    options: JSON.stringify([{ 'title': 'Name', 'field': 'name', 'sorter': 'string', 'width': 200 }, { 'title': 'Email', 'field': 'email', 'sorter': 'number', 'width': 200 }])
   },
   props: ['val', 'h', 'w', 'playState'],
-
   methods: {
     rowClicked (e, row) {
       this.$store.commit('vdh/updateData', {
@@ -75,6 +76,13 @@ export default {
         key: 'selectedRow',
         value: this.val.selectedRow
       })
+    },
+    processOptions (options) {
+      if (options[0] === '[') {
+        return {columns: JSON.parse(options)}
+      } else {
+        return {columns: JSON.parse('[' + options + ']')}
+      }
     }
   }
 }
