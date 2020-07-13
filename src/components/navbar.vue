@@ -1,4 +1,4 @@
-<template> <!-- v-if="mode === 'edit'" -->
+<template>
   <div>
     <transition name="slide-fade">
       <header
@@ -59,9 +59,7 @@
 </template>
 
 <script>
-import vpd from '../mixins/vpd'
 export default {
-  mixins: [vpd],
   data () {
     return {
       langs: ['cn', 'en', 'te'],

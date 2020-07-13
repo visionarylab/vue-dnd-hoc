@@ -40,7 +40,6 @@
 import page from './page.vue'
 import style from './style.vue'
 import params from './params.vue'
-import vpd from '../../mixins/vpd'
 import widget from '../../plugins/widget'
 import { cumulativeOffset, checkInView } from '../../utils/offset'
 
@@ -50,7 +49,6 @@ export default {
     appearance: style,
     params: params
   },
-  mixins: [vpd],
 
   data () {
     return {

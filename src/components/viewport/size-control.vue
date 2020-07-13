@@ -47,9 +47,7 @@
 </template>
 
 <script>
-import vpd from '../../mixins/vpd'
 export default {
-  mixins: [vpd],
   data () {
     return {
       type: ''

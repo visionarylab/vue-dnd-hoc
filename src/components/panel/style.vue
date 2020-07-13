@@ -88,11 +88,9 @@
 
 <script>
 import widget from '../../plugins/widget'
-import vpd from '../../mixins/vpd'
 
 export default {
   name: 'PanelStyle',
-  mixins: [vpd],
   props: ['activeElement', 'tab'],
   data () {
     return {}

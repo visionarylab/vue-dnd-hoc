@@ -19,11 +19,9 @@
 </template>
 
 <script>
-import vpd from '../../mixins/vpd'
 
 export default {
   name: 'RefLines',
-  mixins: [vpd],
   computed: {
     moving () {
       return this.$store.state.vdh.moving

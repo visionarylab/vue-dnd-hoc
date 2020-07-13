@@ -46,6 +46,7 @@ import i18n from './plugins/i18n'
 import actions from './store/actions'
 import mutation from './store/mutation'
 import state from './store/state'
+import { getField, updateField } from 'vuex-map-fields';
 
 export default {
   name: 'VueDndHoc',
@@ -82,9 +83,14 @@ export default {
     this.$store.registerModule('vdh', {
       namespaced: true,
       state: state,
-      mutations: mutation,
+      mutations: {
+        ...mutation,
+        updateField
+      },
       actions: actions,
-      getters: []
+      getters: {
+        getField
+      }
     })
   },
   created () {

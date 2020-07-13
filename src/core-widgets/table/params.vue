@@ -5,10 +5,10 @@
       <div class="panel-label">{{ $t('data.params.options') }}</div>
       <div class="panel-value">
         <textarea
-          v-model="activeElement.options"
+          v-model="options"
           :placeholder="$t('data.params.optionsPlaceholder')"
           :style="{
-            height: (activeElement.options? Math.ceil(activeElement.options.length/10*13) : 26) + 'px',
+            height: (options? Math.ceil(options.length/10*13) : 26) + 'px',
             minHeight: 25 + 'px'
           }"
         />
@@ -19,10 +19,10 @@
       <div class="panel-label">{{ $t('data.params.endpoint') }}</div>
       <div class="panel-value">
         <textarea
-          v-model="activeElement.endpoint"
+          v-model="endpoint"
           :placeholder="$t('data.events.linkPlaceholder')"
           :style="{
-            height: (activeElement.endpoint? Math.ceil(activeElement.endpoint.length/10*13) : 26) + 'px',
+            height: (endpoint? Math.ceil(endpoint.length/10*13) : 26) + 'px',
             minHeight: 25 + 'px',
             marginTop: 6 + 'px'
           }"
@@ -33,10 +33,20 @@
 </template>
 
 <script>
+import mapDynamicFields from '../../utils/field-mapper'
 
 export default {
   name: 'TableParams',
-  props: ['activeElement', 'tab']
+  props: ['activeElement', 'tab'],
+  computed: {
+    activeElementIndex () {
+      return this.$store.state.vdh.widgets.findIndex(widget => widget.uuid === this.activeElement.uuid)
+    },
+    ...mapDynamicFields('vdh', [
+      `widgets[].endpoint`,
+      `widgets[].options`
+    ], 'activeElementIndex')
+  }
 }
 </script>
 <style scoped>

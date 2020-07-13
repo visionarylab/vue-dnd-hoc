@@ -6,9 +6,8 @@
       <div class="panel-label">{{ $t('data.params.options') }}</div>
       <div class="panel-value">
         <textarea
-          v-model="activeElement.text"
+          v-model="text"
           :placeholder="$t('data.params.linkPlaceholder')"
-          @blur="(e) => updateText()"
         />
       </div>
     </div>
@@ -16,25 +15,18 @@
 </template>
 
 <script>
-import vpd from '../../../src/mixins/vpd'
+import mapDynamicFields from '../../utils/field-mapper'
 
 export default {
   name: 'CSTxtParams',
-  mixins: [vpd],
   props: ['activeElement', 'tab'],
   computed: {
-    widgetStore () {
-      return this.$store.state.vdh.widgets.filter(item => item.belong === 'page')
-    }
-  },
-  methods: {
-    updateText () {
-      this.$store.commit('vdh/updateData', {
-        uuid: this.activeElement.uuid,
-        key: 'text',
-        value: this.activeElement.text
-      })
-    }
+    activeElementIndex () {
+      return this.$store.state.vdh.widgets.findIndex(widget => widget.uuid === this.activeElement.uuid)
+    },
+    ...mapDynamicFields('vdh', [
+      `widgets[].text`
+    ], 'activeElementIndex')
   }
 }
 </script>
