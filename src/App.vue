@@ -6,19 +6,24 @@
         <toolbar
           v-show="modeFromState === 'edit'"
           :zoom="zoom"
+          :showtoolbar="showToolBar"
           class="toolbar column"/>
+        <div
+          id="toggle-menu"
+          class="toggle-menu"
+          @click="toggleMenu">
+          <vpd-icon
+            v-if="showToolBar"
+            name="chevrons-left" />
+          <vpd-icon
+            v-if="!showToolBar"
+            name="chevrons-right" />
+        </div>
         <div class="viewport column">
           <viewport :zoom="zoom"/>
-          <div class="zoom-wrap">
-            <vpd-slider
-              :value="zoom"
-              :step="1"
-              :tuning="false"
-              @input="dozoom" />
-            <div class="zoom-value">{{ zoom }}%</div>
-          </div>
         </div>
         <panel
+          v-if="uuid !== -1"
           v-show="modeFromState === 'edit'"
           class="control-panel column"/>
       </div>
@@ -41,7 +46,6 @@ import loadSprite from './utils/load-sprite'
 import vpd from './mixins/vpd'
 import toast from './components/toast.vue'
 import uploader from './components/uploader.vue'
-import slider from './components/slider.vue'
 import i18n from './plugins/i18n'
 import actions from './store/actions'
 import mutation from './store/mutation'
@@ -57,8 +61,7 @@ export default {
     panel,
     viewport,
     [toast.name]: toast,
-    [uploader.name]: uploader,
-    [slider.name]: slider
+    [uploader.name]: uploader
   },
   mixins: [vpd],
   props: {
@@ -68,6 +71,11 @@ export default {
     uploadOption: Object,
     mode: String
   },
+  data () {
+    return {
+      showToolBar: true
+    }
+  },
 
   computed: {
     zoom () {
@@ -75,6 +83,9 @@ export default {
     },
     modeFromState () {
       return this.$store.state.vdh.mode
+    },
+    uuid () {
+      return this.$store.state.vdh.uuid
     }
   },
   beforeCreate () {
@@ -114,6 +125,16 @@ export default {
   methods: {
     dozoom (val) {
       this.$store.commit('vdh/zoom', val)
+    },
+
+    toggleMenu () {
+      this.showToolBar = !this.showToolBar
+      const toggleMenu = document.getElementById('toggle-menu')
+      if (this.showToolBar) {
+        toggleMenu.style.left = '118px'
+      } else {
+        toggleMenu.style.left = '0px'
+      }
     }
   }
 }
@@ -147,7 +168,7 @@ export default {
   box-sizing: content-box;
   &.column {
     flex: none;
-    width: 225px;
+    width: 118px;
   }
 }
 .viewport {
@@ -158,6 +179,8 @@ export default {
   background: #fff;
   user-select: none;
   height: calc(100vh - 57px);
+  position: absolute;
+  right: 0;
   &.column {
     flex: none;
     width: 340px;
@@ -202,5 +225,21 @@ export default {
 /* .slide-fade-leave-active below version 2.1.8 */ {
   transform: translateX(20px);
   opacity: 0;
+}
+.toggle-menu {
+  background-color: #fff;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #ddd;
+  border-left: none;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  justify-content: center;
+  position: absolute;
+  left: 118px;
+  z-index: 999;
+  transform: translateY(40vh);
+  cursor: pointer;
 }
 </style>

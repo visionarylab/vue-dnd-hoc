@@ -37,9 +37,9 @@ export default {
     isChild: true,
     dragable: true,
     resizable: true,
-    width: 650,
-    height: 100,
-    left: 50,
+    width: 95,
+    height: 95,
+    left: 1,
     top: 0,
     z: 0,
     lineHeight: 1.6,
@@ -50,7 +50,11 @@ export default {
     text: 'Text',
     href: '',
     belong: 'page',
-    animationName: ''
+    animationName: '',
+    x: 0,
+    y: 0,
+    w: 5,
+    h: 2
   },
   props: ['val', 'h', 'w', 'playState']
 }

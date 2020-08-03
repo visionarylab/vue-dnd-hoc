@@ -128,7 +128,8 @@ export default {
   },
 
   addWidget (state, { data: data = null, item }) {
-    let def = { top: state.top, uuid: generate('1234567890abcdef', 10) }
+    const id = generate('1234567890abcdef', 10)
+    let def = { top: state.top || 1, uuid: id, i: id, x: item.setting.x, y: item.setting.y, w: item.setting.w, h: item.setting.h }
     let setting = JSON.parse(JSON.stringify(item.setting))
 
     if (setting.isContainer) {

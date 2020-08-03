@@ -1,5 +1,8 @@
 <template>
-  <div class="menu-bar">
+  <div
+    v-if="showtoolbar"
+    id="menu-bar"
+    class="menu-bar">
     <ul class="tab tab-block panel-tab">
       <li
         :class="{active: activeTab === 1}"
@@ -50,7 +53,7 @@ import vpd from '../mixins/vpd'
 
 export default {
   mixins: [move, vpd],
-  props: ['zoom'],
+  props: ['zoom', 'showtoolbar'],
   data () {
     return {
       activeTab: 1
@@ -81,8 +84,8 @@ export default {
 @import '../_variables.scss';
 .rows {
   display:grid;
-  grid-template-columns: 100px 100px;
-  grid-row: auto auto;
+  grid-template-columns: 100px;
+  grid-row: auto;
   grid-column-gap: 5px;
   grid-row-gap: 5px;
 }
@@ -108,6 +111,7 @@ export default {
   .tabcontent {
     padding: 10px;
   }
+  transition: all 0.2s;
 }
 .widget-list {
   padding: 0;
@@ -155,4 +159,5 @@ export default {
 .tab-item {
   background-color: #fff;
 }
+
 </style>

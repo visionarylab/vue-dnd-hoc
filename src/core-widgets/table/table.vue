@@ -45,5 +45,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import  "~vue-tabulator/dist/scss/bootstrap/tabulator_bootstrap4";
+@import  "~vue-tabulator/dist/scss/tabulator_modern";
 </style>

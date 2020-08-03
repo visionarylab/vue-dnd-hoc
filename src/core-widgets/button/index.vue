@@ -1,18 +1,29 @@
 <template>
-  <button
+  <div
     :style="{
       position: 'absolute',
       width: val.width / w * 100 + '%',
       height: val.height / h * 100 + '%',
       left: val.left / w * 100 + '%',
       top: val.top / h * 100 + '%',
-      zIndex: val.z,
-      backgroundColor: val.bgColor,
-      backgroundImage: 'url(' + val.backPic + ')',
-      color: val.color
+      zIndex: val.z
     }"
-    contenteditable="false"
-    v-html="val.text"/>
+    contenteditable="false">
+    <button
+      :style="{
+        position: 'absolute',
+        width: 100 + '%',
+        height: 100 + '%',
+        left: 0,
+        top: 0,
+        zIndex: val.z,
+        backgroundColor: val.bgColor,
+        backgroundImage: 'url(' + val.backPic + ')',
+        color: val.color
+      }"
+      class="no-events"
+      v-html="val.text"/>
+  </div>
 </template>
 
 <script>
@@ -35,9 +46,9 @@ export default {
     dragable: true,
     resizable: true,
     name: '',
-    width: 250,
-    height: 60,
-    left: 50,
+    width: 95,
+    height: 95,
+    left: 1,
     top: 0,
     z: 0,
     bgColor: '#000000',
@@ -46,7 +57,11 @@ export default {
     color: '#ffffff',
     text: 'Button',
     belong: 'page',
-    animationName: ''
+    animationName: '',
+    x: 0,
+    y: 0,
+    w: 5,
+    h: 2
   },
   props: ['h', 'w', 'val', 'playState']
 }
@@ -57,5 +72,10 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
+}
+.no-events {
+  pointer-events:none;
+  display: grid;
+  align-items: center;
 }
 </style>
