@@ -5,7 +5,7 @@
       :upload="handleUpload"
       :upload-option="uploadOption"
       :mode="mode"
-      @save="handleSave" />
+      :save="handleSave" />
   </div>
 </template>
 

@@ -11,7 +11,7 @@
       }"
       class="screen"
       @dblclick="replaceImage">
-      <grid-layout
+      <smart-widget-grid
         :layout="widgetStore"
         :col-num="22"
         :row-height="30"
@@ -20,57 +20,53 @@
         :is-mirrored="false"
         :vertical-compact="true"
         :margin="[5, 5]"
-        :use-css-transforms="true">
-        <grid-item
+        :use-css-transforms="true"
+        @layout-updated="layoutUpdatedEvent">
+        <smart-widget
           v-for="(item, index) in widgetStore"
           :key="index"
-          :auto-size="true"
-          :x="item.x"
-          :y="item.y"
-          :w="item.w"
-          :h="item.h"
-          :i="item.i">
+          :slot="item.i"
+          :title="item.title"
+          :sub-title="item.subTitle"
+          :fixed-height="item.fixedHeight"
+          :refresh="item.refresh"
+          :padding="item.padding"
+          :fullscreen="item.fullScreen"
+          :simple="!item.headerEnabled">
           <component
             :is="item.type"
             :data-title="item.type"
             :class="{'g-active': (id === item.uuid && mode === 'edit'), 'layer': (mode === 'edit') }"
             :key="item.uuid"
             :val="item"
-            :h="100"
-            :w="100"
             :data-type="item.type"
             :data-uuid="item.uuid"
             :play-state="playState"
             :id="item.uuid"/>
-        </grid-item>
-      </grid-layout>
+        </smart-widget>
+      </smart-widget-grid>
     </div>
   </div>
 </template>
 
 <script>
-import ref from './ref-lines.vue'
-import control from './size-control.vue'
+import Vue from 'vue'
 import { move } from '../../mixins'
-import vpd from '../../mixins/vpd'
-import { GridLayout, GridItem } from 'vue-grid-layout'
+import VueSmartWidget from 'vue-smart-widget'
+Vue.use(VueSmartWidget)
 
 export default {
   name: 'Viewport',
   components: {
-    ref: ref,
-    control: control
   },
 
-  mixins: [move, vpd],
+  mixins: [move],
 
   props: ['zoom'],
 
   data () {
     return {
-      deleteIcon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="#trash-2"><svg viewBox="0 0 24 24" width="24" height="24" id="trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></use></svg>',
-      GridLayout,
-      GridItem
+      deleteIcon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="#trash-2"><svg viewBox="0 0 24 24" width="24" height="24" id="trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></use></svg>'
     }
   },
 
@@ -149,15 +145,11 @@ export default {
 
       if (type) {
         var uuid = target.getAttribute('data-uuid')
-
         this.$store.commit('vdh/select', {
           uuid: uuid || -1
         })
 
         target = this.$store.state.vdh.activeElement
-        // if (target.belong === 'page' && target.dragable && this.mode === 'edit') {
-        //   this.initmovement(e)
-        // }
       } else {
         this.$store.commit('vdh/select', {
           uuid: -1
@@ -182,10 +174,8 @@ export default {
     setScreenDimensions () {
       const body = document.querySelector('body')
       this.$refs.screen.style.width = body.offsetWidth + 'px'
-      console.log('setScreenDimensions -> body.offsetWidth', body.offsetWidth)
-      // this.$refs.screen.classList.add('screen-transition')
       if (this.mode === 'edit') {
-        this.$refs.screen.style.height = (body.offsetHeight - 57) + 'px'
+        this.$refs.screen.style.height = (body.offsetHeight) + 'px'
         let items = document.querySelectorAll('[contenteditable="false"]')
         for (let i = 0; i < items.length; i++) {
           items[i].contentEditable = true
@@ -197,6 +187,9 @@ export default {
           items[i].contentEditable = false
         }
       }
+    },
+    layoutUpdatedEvent: function (newLayout) {
+      this.$store.commit('vdh/mergeLayout', newLayout);
     }
   }
 }
@@ -226,9 +219,7 @@ export default {
 .screen-transition {
   transition: all 0.8s ease-in-out;
 }
-.vue-grid-item {
-  background-color: #f7f7f7;
-}
+
 .tabulator {
   font-size: 14px;
 }

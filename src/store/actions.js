@@ -11,7 +11,8 @@ export default {
       })
     }
   },
-  save ({ state, store }) {
-    store.$emit('save', state)
+  save ({ state }, saveHandler) {
+    saveHandler(state);
+    console.log('State', state);
   }
 }

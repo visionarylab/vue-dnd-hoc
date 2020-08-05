@@ -8,10 +8,8 @@
 </template>
 
 <script>
-import vpd from '../mixins/vpd'
 export default {
   name: 'VpdToast',
-  mixins: [vpd],
   data () {
     return {
       info: '',
@@ -29,9 +27,6 @@ export default {
     }
   },
   mounted () {
-    this.$vpd.$on('notify', (option) => {
-      this.notify(option.info, option.type)
-    })
   },
   methods: {
     notify (info, type) {

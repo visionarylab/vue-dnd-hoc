@@ -4,61 +4,74 @@
     class="panel-wrap">
     <div class="panel-row">
       <vpd-icon name="layers" />
-      <div class="panel-label">{{ $t('data.levels') }}</div>
-      <div class="panel-value">{{ activeElement.z }}</div>
+      <div class="panel-label">{{ $t('data.names.padding') }}</div>
+      <div class="panel-value">{{ activeElement.padding }}</div>
       <div class="panel-slider-wrap">
         <vpd-slider
-          v-model="activeElement.z"
+          v-model="activeElement.padding"
           :step="1"
+          :min="10"
           :max="20" />
-      </div>
-    </div>
-
-    <div class="panel-row">
-      <vpd-icon name="more-horizontal" />
-      <div class="panel-label">{{ $t('data.names.width') }}</div>
-      <div class="panel-value">{{ activeElement.width }}</div>
-      <div class="panel-slider-wrap">
-        <vpd-slider
-          v-model="activeElement.width"
-          :step="1"
-          :max="containerWidth - activeElement.left" />
       </div>
     </div>
 
     <div class="panel-row">
       <vpd-icon name="more-vertical" />
       <div class="panel-label">{{ $t('data.names.height') }}</div>
-      <div class="panel-value">{{ activeElement.height }}</div>
-      <div class="panel-slider-wrap">
-        <vpd-slider
-          v-model="activeElement.height"
-          :step="1"
-          :max="containerHeight - activeElement.top" />
+      <div class="panel-value">
+        <label class="form-switch">
+          <input
+            v-model="activeElement.fixedHeight"
+            type="checkbox"
+          >
+          <i class="form-icon"/>
+        </label>
       </div>
     </div>
 
     <div class="panel-row">
-      <vpd-icon name="arrow-right" />
-      <div class="panel-label">{{ $t('data.names.left') }}</div>
-      <div class="panel-value">{{ activeElement.left }}</div>
-      <div class="panel-slider-wrap">
-        <vpd-slider
-          v-model="activeElement.left"
-          :step="1"
-          :max="containerWidth - activeElement.width" />
+      <vpd-icon name="maximize" />
+      <div class="panel-label">{{ $t('data.names.fullScreen') }}</div>
+      <div class="panel-value">
+        <label class="form-switch">
+          <input
+            v-model="activeElement.fullScreen"
+            type="checkbox"
+          >
+          <i class="form-icon"/>
+        </label>
       </div>
     </div>
 
     <div class="panel-row">
-      <vpd-icon name="arrow-down" />
-      <div class="panel-label">{{ $t('data.names.top') }}</div>
-      <div class="panel-value">{{ activeElement.top }}</div>
-      <div class="panel-slider-wrap">
-        <vpd-slider
-          v-model="activeElement.top"
-          :step="1"
-          :max="containerHeight - activeElement.height" />
+      <vpd-icon name="refresh-ccw" />
+      <div class="panel-label">{{ $t('data.names.refresh') }}</div>
+      <div
+        class="panel-value"
+        style="float: right">
+        <label class="form-switch">
+          <input
+            v-model="activeElement.refresh"
+            type="checkbox"
+          >
+          <i class="form-icon"/>
+        </label>
+      </div>
+    </div>
+
+    <div class="panel-row">
+      <vpd-icon name="type" />
+      <div class="panel-label">{{ $t('data.names.headerEnabled') }}</div>
+      <div
+        class="panel-value"
+        style="float: right">
+        <label class="form-switch">
+          <input
+            v-model="activeElement.headerEnabled"
+            type="checkbox"
+          >
+          <i class="form-icon"/>
+        </label>
       </div>
     </div>
 
@@ -111,20 +124,6 @@ export default {
         val => val.isContainer && val.name && arr.push(val.name)
       )
       return arr
-    },
-
-    containerHeight () {
-      if (this.activeElement.belong && this.activeElement.belong !== 'page') {
-        return this.getActiveContainer().height
-      }
-      return this.$store.state.vdh.page.height
-    },
-
-    containerWidth () {
-      if (this.activeElement.belong && this.activeElement.belong !== 'page') {
-        return this.getActiveContainer().width
-      }
-      return 1280
     }
   },
 

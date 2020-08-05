@@ -9,10 +9,9 @@
 </template>
 
 <script>
-import vpd from '../mixins/vpd'
 export default {
   name: 'VpdUploader',
-  mixins: [vpd],
+  mixins: [],
   props: {
     upload: Function,
     uploadOption: Object
@@ -33,14 +32,6 @@ export default {
 
   mounted () {
     this.uploader = document.getElementById('uploader')
-
-    this.$vpd.$on('upload', (cb, multiple) => {
-      this.multiple = !!multiple
-      this.cb = cb
-      setTimeout(() => {
-        this.uploader.click()
-      }, 0)
-    })
   },
 
   methods: {

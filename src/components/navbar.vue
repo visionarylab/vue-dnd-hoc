@@ -30,7 +30,7 @@
             <a
               class="btn btn-link tooltip tooltip-bottom"
               data-tooltip="Ctrl + S"
-              @click="save"><vpd-icon name="save" /> {{ $t('data.actions.save') }}</a>
+              @click="saveWrapper"><vpd-icon name="save" /> {{ $t('data.actions.save') }}</a>
             <select
               v-model="$i18n.locale"
               class="lang-change">
@@ -60,6 +60,9 @@
 
 <script>
 export default {
+  props: {
+    save: Function
+  },
   data () {
     return {
       langs: ['cn', 'en', 'te'],
@@ -125,8 +128,8 @@ export default {
   },
 
   methods: {
-    save () {
-      this.$store.dispatch('vdh/save')
+    saveWrapper () {
+      this.$store.dispatch('vdh/save', this.save)
     },
 
     copyWidget () {

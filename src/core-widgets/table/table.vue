@@ -1,17 +1,29 @@
 <template>
-  <div>
-    <VueTabulator
+  <div class="layout-center">
+    <!-- <VueTabulator
       v-model="tableData"
       :options="options"
-      class="table-striped table-bordered"/>
+      class="table-striped table-bordered"/> -->
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Genre</th>
+          <th>Release date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="active">
+          <td>The Shawshank Redemption</td>
+          <td>Crime, Drama</td>
+          <td>14 October 1994</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-
-import VueTabulator from 'vue-tabulator';
-Vue.use(VueTabulator);
 
 export default {
   name: 'Tablulator',
@@ -43,7 +55,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import  "~vue-tabulator/dist/scss/tabulator_modern";
-</style>

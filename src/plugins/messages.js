@@ -30,7 +30,11 @@ const messages = {
         animation: 'Animation',
 
         width: 'Width',
-        height: 'Height',
+        height: 'Fixed Height',
+        fullScreen: 'Full Screen',
+        refresh: 'Refresh',
+        padding: 'Padding',
+        headerEnabled: 'Header',
         left: 'Left',
         top: 'Top',
         center: 'Center',
@@ -82,10 +86,13 @@ const messages = {
         },
 
         alerts: {
-          imageUploadApiConfigurator: 'Please configure the picture upload api address',
-          unnamed_animations: 'There are unnamed animations, please name them first',
+          imageUploadApiConfigurator:
+            'Please configure the picture upload api address',
+          unnamed_animations:
+            'There are unnamed animations, please name them first',
           animation_name_required: 'Please name the animation first',
-          animation_name_validate: 'Do not use characters other than English and numbers'
+          animation_name_validate:
+            'Do not use characters other than English and numbers'
         }
       },
 
@@ -280,10 +287,13 @@ const messages = {
         },
 
         alerts: {
-          imageUploadApiConfigurator: 'దయచేసి చిత్రాన్ని అప్‌లోడ్ చేసిన API చిరునామాను కాన్ఫిగర్ చేయండి',
-          unnamed_animations: 'పేరులేని యానిమేషన్లు ఉన్నాయి, దయచేసి మొదట వాటిని పేరు పెట్టండి',
+          imageUploadApiConfigurator:
+            'దయచేసి చిత్రాన్ని అప్‌లోడ్ చేసిన API చిరునామాను కాన్ఫిగర్ చేయండి',
+          unnamed_animations:
+            'పేరులేని యానిమేషన్లు ఉన్నాయి, దయచేసి మొదట వాటిని పేరు పెట్టండి',
           animation_name_required: 'దయచేసి మొదట యానిమేషన్‌కు పేరు పెట్టండి',
-          animation_name_validate: 'ఇంగ్లీష్ మరియు సంఖ్యలు కాకుండా ఇతర అక్షరాలను ఉపయోగించవద్దు'
+          animation_name_validate:
+            'ఇంగ్లీష్ మరియు సంఖ్యలు కాకుండా ఇతర అక్షరాలను ఉపయోగించవద్దు'
         }
       },
 
@@ -295,6 +305,6 @@ const messages = {
       }
     }
   }
-}
+};
 
-export default messages
+export default messages;

@@ -31,12 +31,10 @@
   "dependencies": {
     "nanoid": "^1.0.1",
     "spectre.css": "^0.5.0",
-    "tabulator-tables": "^4.6.3",
     "vue": "^2.5.22",
-    "vue-grid-layout": "^2.3.7",
     "vue-i18n": "^7.6.0",
     "vue-server-renderer": "^2.5.17",
-    "vue-tabulator": "^1.2.2",
+    "vue-smart-widget": "^0.5.5",
     "vuex": "^3.5.1",
     "vuex-map-fields": "^1.4.0"
   },

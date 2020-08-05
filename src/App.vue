@@ -1,6 +1,8 @@
 <template>
   <div class="app">
-    <navbar :mode="mode"/>
+    <navbar
+      :mode="mode"
+      :save="save"/>
     <div class="body container">
       <div class="columns col-gapless">
         <toolbar
@@ -43,7 +45,6 @@ import toolbar from './components/toolbar.vue'
 import panel from './components/panel/index.vue'
 import viewport from './components/viewport/index.vue'
 import loadSprite from './utils/load-sprite'
-import vpd from './mixins/vpd'
 import toast from './components/toast.vue'
 import uploader from './components/uploader.vue'
 import i18n from './plugins/i18n'
@@ -63,13 +64,13 @@ export default {
     [toast.name]: toast,
     [uploader.name]: uploader
   },
-  mixins: [vpd],
   props: {
     value: Object,
     widgets: Object,
     upload: Function,
     uploadOption: Object,
-    mode: String
+    mode: String,
+    save: Function
   },
   data () {
     return {
@@ -111,9 +112,6 @@ export default {
     if (this.value) {
       this.$store.commit('vdh/replaceState', this.value)
     }
-    this.$vpd.$on('save', () => {
-      this.$emit('save', this.$store.state.vdh)
-    })
     if (this.mode) {
       this.$store.commit('vdh/mode', this.mode)
     }

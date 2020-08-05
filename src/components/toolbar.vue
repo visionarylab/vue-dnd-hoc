@@ -49,10 +49,9 @@
 <script>
 import widget from '../plugins/widget'
 import { move } from '../mixins'
-import vpd from '../mixins/vpd'
 
 export default {
-  mixins: [move, vpd],
+  mixins: [move],
   props: ['zoom', 'showtoolbar'],
   data () {
     return {

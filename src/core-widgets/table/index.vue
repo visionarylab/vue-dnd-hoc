@@ -1,24 +1,12 @@
 <template>
   <div
-    :class="[playState ? 'anm-' + val.animationName : '']"
     :style="{
       position: val.belong === 'page' ? 'absolute' : 'relative',
-      left: val.left / w * 100 + '%',
-      top: val.top / h * 100 + '%',
-      width: val.width / w * 100 + '%',
-      minHeight: val.height / h * 100 + '%',
-      zIndex: val.z,
-      lineHeight: val.lineHeight,
-      fontSize: val.fontSize + 'rem',
-      color: val.color,
-      textAlign: val.textAlign,
       fontWeight: val.fontWeight ? 'bold' : 'normal'
     }"
-    class="txt"
   >
     <tablulator
       :endpoint="val.endpoint"
-      :options="processOptions(val.options)"
       class="no-events"/>
   </div>
 </template>
@@ -56,6 +44,8 @@ export default {
     z: 0,
     lineHeight: 1.6,
     fontSize: 0.4,
+    fullScreen: true,
+    refresh: true,
     fontWeight: false,
     color: '#000000',
     textAlign: 'left',
@@ -65,12 +55,16 @@ export default {
     animationName: '',
     autoResize: true,
     resizableRows: true,
+    title: 'Tabular Data',
+    subTitle: '',
+    headerEnabled: true,
+    padding: 15,
     x: 0,
     y: 0,
     w: 9,
-    h: 3,
+    h: 9,
     endpoint: 'https://jsonplaceholder.typicode.com/users/4',
-    options: JSON.stringify([{ 'title': 'Name', 'field': 'name', 'sorter': 'string', 'width': 200 }, { 'title': 'Email', 'field': 'email', 'sorter': 'number', 'width': 200 }])
+    options: JSON.stringify({'layout': 'fitColumns', 'columns': [{ 'title': 'Name', 'field': 'name', 'sorter': 'string' }, { 'title': 'Email', 'field': 'email', 'sorter': 'number' }]})
   },
   props: ['val', 'h', 'w', 'playState'],
   methods: {
@@ -79,7 +73,7 @@ export default {
         uuid: this.val.uuid,
         key: 'selectedRow',
         value: this.val.selectedRow
-      })
+      });
     },
     processOptions (options) {
       if (options[0] === '[') {

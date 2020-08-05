@@ -21,7 +21,7 @@ export default {
     title: 'Page',
     height: 720,
     endTime: new Date(),
-    backgroundColor: '#fff'
+    backgroundColor: '#faf9fe'
   },
   widgets: [],
 

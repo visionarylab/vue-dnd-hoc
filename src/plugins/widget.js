@@ -1,6 +1,5 @@
 // widgets
 import coreWidgets from '../core-widgets'
-import vpd from '../mixins/vpd'
 
 var widgets
 var widgetPanels = {'style': {}, 'params': {}}
@@ -12,12 +11,12 @@ const install = (Vue, config = {}) => {
 
   Object.keys(widgets).forEach(key => {
     Vue.component(key, widgets[key])
-    Vue.component(key, Vue.extend(widgets[key]).extend(vpd))
+    Vue.component(key, Vue.extend(widgets[key]))
     // style panel
     if (widgets[key]['panel']) {
       for (const [k, v] of Object.entries(widgets[key]['panel'])) {
         let panel = Object.assign({}, v, { type: key })
-        Vue.component(panel.name, Vue.extend(panel).extend(vpd))
+        Vue.component(panel.name, Vue.extend(panel))
         widgetPanels[k][panel.name] = panel
       }
       // remove panel from object
