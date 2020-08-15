@@ -1,0 +1,62 @@
+[
+    {
+      "group": "January",
+      "revenue": 240000,
+      "target": 140000
+    },
+    {
+      "group": "February",
+      "revenue": 100000,
+      "target": 140000
+    },
+    {
+      "group": "March",
+      "revenue": 130000,
+      "target": 140000
+    },
+    {
+      "group": "April",
+      "revenue": 100000,
+      "target": 140000
+    },
+    {
+      "group": "May",
+      "revenue": 145000,
+      "target": 140000
+    },
+    {
+      "group": "June",
+      "revenue": 280000,
+      "target": 140000
+    },
+    {
+      "group": "July",
+      "revenue": 0,
+      "target": 0
+    },
+    {
+      "group": "August",
+      "revenue": 0,
+      "target": 0
+    },
+    {
+      "group": "September",
+      "revenue": 0,
+      "target": 0
+    },
+    {
+      "group": "October",
+      "revenue": 0,
+      "target": 0
+    },
+    {
+      "group": "November",
+      "revenue": 0,
+      "target": 0
+    },
+    {
+      "group": "December",
+      "revenue": 0,
+      "target": 0
+    }
+  ]

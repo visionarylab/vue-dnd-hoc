@@ -42,7 +42,8 @@
             :data-type="item.type"
             :data-uuid="item.uuid"
             :play-state="playState"
-            :id="item.uuid"/>
+            :id="item.uuid"
+            :style="{width: item.width + '%'}"/>
         </smart-widget>
       </smart-widget-grid>
     </div>
@@ -173,15 +174,16 @@ export default {
 
     setScreenDimensions () {
       const body = document.querySelector('body')
+      const header = document.querySelector('header')
       this.$refs.screen.style.width = body.offsetWidth + 'px'
       if (this.mode === 'edit') {
-        this.$refs.screen.style.height = (body.offsetHeight) + 'px'
+        this.$refs.screen.style.height = (body.offsetHeight - header.offsetHeight) + 'px'
         let items = document.querySelectorAll('[contenteditable="false"]')
         for (let i = 0; i < items.length; i++) {
           items[i].contentEditable = true
         }
       } else {
-        this.$refs.screen.style.height = body.offsetHeight + 'px'
+        this.$refs.screen.style.height = (body.offsetHeight - header.offsetHeight) + 'px'
         let items = document.querySelectorAll('[contenteditable="true"]')
         for (let i = 0; i < items.length; i++) {
           items[i].contentEditable = false

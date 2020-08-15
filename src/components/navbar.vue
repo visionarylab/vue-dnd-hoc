@@ -6,7 +6,9 @@
         class="header">
         <div class="navbar container">
           <section class="logo navbar-section">
-            <vpd-icon name="anchor" />
+            <vpd-icon
+              name="menu"
+              @click="toggleToolBar"/>
           </section>
           <section class="navbar-section">
             <a
@@ -43,18 +45,6 @@
         </div>
       </header>
     </transition>
-    <transition name="slide-fade1">
-      <div
-        v-if="mode === 'preview'"
-        class="back-to-edit">
-        <div
-          class="btn btn-link tooltip tooltip-bottom"
-          data-tooltip="Back To Edit View"
-          @click="backToEdit">
-          <vpd-icon :svg="returnIcon"/> {{ $t('data.actions.return') }}
-        </div>
-      </div>
-    </transition>
   </div>
 </template>
 
@@ -67,7 +57,8 @@ export default {
     return {
       langs: ['cn', 'en', 'te'],
       previewIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect><line x1="12" y1="5" x2="12" y2="17"></line><line x1="12" y1="12" x2="22" y2="12"></line></svg>',
-      returnIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><defs><marker id="arrowhead" markerWidth="7" markerHeight="12" fill="#000" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 6 3.5, 0 7" /></marker></defs><line x1="24" y1="12" x2="18" y2="12" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)"/>'
+      returnIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><defs><marker id="arrowhead" markerWidth="7" markerHeight="12" fill="#000" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 6 3.5, 0 7" /></marker></defs><line x1="24" y1="12" x2="18" y2="12" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)"/>',
+      showToolBar: true
     }
   },
   computed: {
@@ -86,6 +77,9 @@ export default {
         e.stopPropagation()
         if ((e.ctrlKey || e.metaKey) && e.keyCode === 67) {
           this.copyWidget()
+        }
+        if (e.key === 'Escape') {
+          this.backToEdit()
         }
       },
       true
@@ -146,6 +140,11 @@ export default {
 
     backToEdit () {
       this.$store.commit('vdh/mode', 'edit')
+    },
+
+    toggleToolBar () {
+      this.showToolBar = !this.showToolBar
+      this.$emit('toggleToolBar', this.showToolBar)
     }
   }
 }
@@ -176,20 +175,12 @@ export default {
       width: 30px;
       text-align: center;
       background-color: $light-color;
-      border-radius: 50%;
+      border-radius: 2px;
     }
   }
   .lang-change {
     width: 80px;
   }
-}
-.back-to-edit {
-  position: absolute;
-  background: #fff;
-  z-index: 1;
-  float: right;
-  right: 0;
-  border: 1px solid #000;
 }
 .slide-fade-enter-active {
   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);

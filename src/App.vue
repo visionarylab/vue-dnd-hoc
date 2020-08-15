@@ -2,7 +2,8 @@
   <div class="app">
     <navbar
       :mode="mode"
-      :save="save"/>
+      :save="save"
+      @toggleToolBar="toggleToolBar"/>
     <div class="body container">
       <div class="columns col-gapless">
         <toolbar
@@ -10,17 +11,6 @@
           :zoom="zoom"
           :showtoolbar="showToolBar"
           class="toolbar column"/>
-        <div
-          id="toggle-menu"
-          class="toggle-menu"
-          @click="toggleMenu">
-          <vpd-icon
-            v-if="showToolBar"
-            name="chevrons-left" />
-          <vpd-icon
-            v-if="!showToolBar"
-            name="chevrons-right" />
-        </div>
         <div class="viewport column">
           <viewport :zoom="zoom"/>
         </div>
@@ -124,15 +114,9 @@ export default {
     dozoom (val) {
       this.$store.commit('vdh/zoom', val)
     },
-
-    toggleMenu () {
-      this.showToolBar = !this.showToolBar
-      const toggleMenu = document.getElementById('toggle-menu')
-      if (this.showToolBar) {
-        toggleMenu.style.left = '118px'
-      } else {
-        toggleMenu.style.left = '0px'
-      }
+    toggleToolBar (value) {
+      console.log('toggleToolBar -> value', value)
+      this.showToolBar = value
     }
   }
 }

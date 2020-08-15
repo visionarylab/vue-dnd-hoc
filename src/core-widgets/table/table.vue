@@ -1,22 +1,22 @@
 <template>
   <div class="layout-center">
-    <!-- <VueTabulator
-      v-model="tableData"
-      :options="options"
-      class="table-striped table-bordered"/> -->
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Genre</th>
-          <th>Release date</th>
+          <th
+            v-for="colHead in JSON.parse(options).columns"
+            :key="colHead.title">{{ colHead.title }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="active">
-          <td>The Shawshank Redemption</td>
-          <td>Crime, Drama</td>
-          <td>14 October 1994</td>
+        <tr
+          v-for="row in tableData"
+          :key="row.id">
+          <td
+            v-for="(val, index) in row"
+            :key="index">
+            {{ val }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Tablulator',
   props: ['options', 'endpoint'],
@@ -50,6 +49,7 @@ export default {
           this.tableData = []
           this.tableData.push(data)
         }
+        this.tableData = this.tableData.map(row => JSON.parse(this.options).columns.map(colName => row[colName.field]))
       })
     }
   }

@@ -5,30 +5,29 @@
       fontWeight: val.fontWeight ? 'bold' : 'normal'
     }"
   >
-    <tablulator
+    <barGraph
       :endpoint="val.endpoint"
-      :options="val.options"
+      :json-data="val.jsonData"
+      :id="val.uuid"
       class="no-events"/>
   </div>
 </template>
 
 <script>
 import params from './params'
-import tablulator from './table.vue'
+import barGraph from './barGraph.vue'
 
-const WIDGET_NAME = 'cs-table'
+const WIDGET_NAME = 'cs-barGraph'
 
 export default {
   name: WIDGET_NAME,
-  components: { tablulator },
-  icon: `<svg class="bi bi-table" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-    <path fill-rule="evenodd" d="M15 4H1V3h14v1z"/>
-    <path fill-rule="evenodd" d="M5 15.5v-14h1v14H5zm5 0v-14h1v14h-1z"/>
-    <path fill-rule="evenodd" d="M15 8H1V7h14v1zm0 4H1v-1h14v1z"/>
-    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H0V2z"/>
-  </svg>`,
-  title: 'Table',
+  components: { barGraph },
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2">
+      <line x1="18" y1="20" x2="18" y2="10"></line>
+      <line x1="12" y1="20" x2="12" y2="4"></line>
+      <line x1="6" y1="20" x2="6" y2="14"></line>
+    </svg>`,
+  title: 'BarGraph',
   panel: { 'params': params },
   setting: {
     type: WIDGET_NAME,
@@ -56,7 +55,7 @@ export default {
     animationName: '',
     autoResize: true,
     resizableRows: true,
-    title: 'Tabular Data',
+    title: 'Bar Plot',
     subTitle: '',
     headerEnabled: true,
     padding: 15,
@@ -65,7 +64,7 @@ export default {
     w: 9,
     h: 9,
     endpoint: 'https://jsonplaceholder.typicode.com/users/',
-    options: JSON.stringify({'layout': 'fitColumns', 'columns': [{ 'title': 'Name', 'field': 'name', 'sorter': 'string' }, { 'title': 'Email', 'field': 'email', 'sorter': 'number' }]})
+    options: ''
   },
   props: ['val', 'h', 'w', 'playState'],
   methods: {
@@ -75,13 +74,6 @@ export default {
         key: 'selectedRow',
         value: this.val.selectedRow
       });
-    },
-    processOptions (options) {
-      if (options[0] === '[') {
-        return {columns: JSON.parse(options)}
-      } else {
-        return {columns: JSON.parse('[' + options + ']')}
-      }
     }
   }
 }
