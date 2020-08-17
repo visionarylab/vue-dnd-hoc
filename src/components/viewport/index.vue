@@ -43,7 +43,7 @@
             :data-uuid="item.uuid"
             :play-state="playState"
             :id="item.uuid"
-            :style="{width: item.width + '%'}"/>
+            :style="{width: item.width + '%', height: item.height + '%'}"/>
         </smart-widget>
       </smart-widget-grid>
     </div>

@@ -60,8 +60,8 @@ export default {
     padding: 15,
     x: 0,
     y: 0,
-    w: 3,
-    h: 4,
+    w: 6,
+    h: 9,
     endpoint: 'https://jsonplaceholder.typicode.com/users/',
     options: ''
   },
