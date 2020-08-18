@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import params from './params'
+import params from './params.vue'
 import gauge from './gauge.vue'
 
 const WIDGET_NAME = 'cs-gauge'

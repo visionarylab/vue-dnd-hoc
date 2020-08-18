@@ -1,6 +1,6 @@
 {
   "name": "vue-dnd-hoc",
-  "version": "0.10.3",
+  "version": "0.10.5",
   "description": "A drag-and-drop editor for higher order components.",
   "repository": {
     "url": "crowdshakti/vue-dnd-hoc",

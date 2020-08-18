@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import params from './params'
+import params from './params.vue'
 import tablulator from './table.vue'
 
 const WIDGET_NAME = 'cs-table'

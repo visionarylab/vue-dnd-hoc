@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import params from './params'
+import params from './params.vue'
 import barGraph from './barGraph.vue'
 
 const WIDGET_NAME = 'cs-barGraph'

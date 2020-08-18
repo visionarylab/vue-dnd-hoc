@@ -58,8 +58,8 @@ function genConfig (options) {
           extract: true
         }),
         vue({ css: false }),
-        resolve(),
-        buble({ exclude: 'node_modules/**' })
+        resolve()
+        // buble({ exclude: 'node_modules/**' })
       ]
     },
     output: {
